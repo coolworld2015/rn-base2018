@@ -11,72 +11,46 @@ import {
 	TouchableOpacity
 } from 'react-native';
 
-import ScrollableTabView from 'react-native-scrollable-tab-view';
+import NavigationExperimental from 'react-native-deprecated-custom-components';
+import ScrollableTabView, {DefaultTabBar} from 'react-native-scrollable-tab-view';
 
-import Audit from './audit';
-import AuditDetails from './auditDetails';
+/*
+PushFromRight
+FloatFromRight
+FloatFromLeft
+FloatFromBottom
+FloatFromBottomAndroid
+FadeAndroid
+HorizontalSwipeJump
+HorizontalSwipeJumpFromRight
+VerticalUpSwipeJump
+VerticalDownSwipeJump
+*/ 
 
 class SampleApp extends Component {
 	constructor(props) {
 		super(props);	
 	}
-	
+	//<ScrollableTabView>
+	//</ScrollableTabView>
 	render() {
 		return (
-			<ScrollableTabView>
-				<AuditTab tabLabel="Audit" />
-				<PageOne tabLabel="PageOne" />
- 
-			</ScrollableTabView>
+			<PageOne tabLabel="PageOne" />
 		);
 	}
 }
 
-class AuditTab extends Component {
+class AppContainer extends Component {
 	constructor(props) {
 		super(props);
-		this.routes = [
-			{title: 'Audit', index: 0},
-			{title: 'Audit Details', index: 1}
-		];
 	}
-		  
-	renderScene(route, navigator) {
-		switch (route.index) {
-			case 0: return <Audit routes={this.routes} navigator={navigator} />
-					break;			
-			case 1: return <AuditDetails data={route.data} routes={this.routes} navigator={navigator} />
-					break
- 		}
- 	}	
 	
 	render() {
 		return (
-	  		<Navigator
-			initialRoute={this.routes[0]}
-			initialRouteStack={this.routes}
-		    renderScene={this.renderScene.bind(this)}
-
-		    navigationBar1={
-				<Navigator.NavigationBar
-					routeMapper={{
-						LeftButton: (route, navigator, index, navState) =>
-							{ return null;(<Text>Cancel</Text>); },
-						RightButton: (route, navigator, index, navState) =>
-							{ return null; (<Text>Done</Text>); },
-						Title: (route, navigator, index, navState) =>
-							{ return (<Text>{route.title}</Text>); },
-					}}
-					style={{backgroundColor: 'white'}}
-				/>
-			}
-			
-			style={{padding: 0}}
-		  
-			configureScene={(route, routeStack) =>
-				Navigator.SceneConfigs.PushFromRight}
-		/>
-		)
+			<ScrollableTabView>
+				<PageOne tabLabel="PageOne" />
+			</ScrollableTabView>
+		);
 	}
 }
 
@@ -103,30 +77,13 @@ class PageOne extends Component {
 	
 	render() {
 		return (
-	  		<Navigator
-			initialRoute={this.routes[0]}
-			initialRouteStack={this.routes}
-		    renderScene={this.renderScene.bind(this)}
-
-		    navigationBar={
-				<Navigator.NavigationBar
-				routeMapper={{
-					LeftButton: (route, navigator, index, navState) =>
-						{ return null;(<Text>Cancel</Text>); },
-					RightButton: (route, navigator, index, navState) =>
-						{ return null; (<Text>Done</Text>); },
-					Title: (route, navigator, index, navState) =>
-						{ return (<Text>{route.title}</Text>); },
-				}}
-				style={{backgroundColor: 'red'}}
-				/>
-							}
-			
-			style={{padding: 0}}
-		  
-			configureScene={(route, routeStack) =>
-				Navigator.SceneConfigs.PushFromRight}
-		/>
+            <NavigationExperimental.Navigator
+                initialRoute={this.routes[0]}
+                initialRouteStack={this.routes}
+                renderScene={this.renderScene.bind(this)}
+                configureScene={(route, routeStack) =>
+                    NavigationExperimental.Navigator.SceneConfigs.FloatFromBottomAndroid}
+            />
 		)
 	}
 }
@@ -136,17 +93,29 @@ class PageFirst extends Component {
 		super(props);
 	}
 	
-	_handlePress() {
-		this.props.navigator.push(this.props.routes[1]);
+	_handlePress2() {
+		this.props.navigator.push({index: 1});
+	}		
+	
+	_handlePress3() {
+		this.props.navigator.push({index: 2});
 	}		
 	
 	render() {
 		return (
 			<View style={[styles.container, {backgroundColor: 'green'}]}>
-				<Text style={styles.welcome}>Greetings!!!</Text>
-				<TouchableOpacity onPress={this._handlePress.bind(this)}>
+				<Text style={styles.welcome}>This is page one!</Text>
+				<TouchableOpacity onPress={this._handlePress2.bind(this)}>
 					<View style={{paddingVertical: 20, paddingHorizontal: 20, backgroundColor: 'black'}}>
-						<Text style={styles.welcome}>Go to page two</Text>
+						<Text style={styles.welcome}>Go to page 2</Text>
+					</View>
+				</TouchableOpacity>		
+				
+				<View style={{margin: 10}}></View>	
+				
+				<TouchableOpacity onPress={this._handlePress3.bind(this)}>
+					<View style={{paddingVertical: 20, paddingHorizontal: 20, backgroundColor: 'black'}}>
+						<Text style={styles.welcome}>Go to page 3</Text>
 					</View>
 				</TouchableOpacity>	
 			</View>
@@ -158,7 +127,11 @@ class PageTwo extends Component {
 	constructor(props) {
 		super(props);	
 	}
-		
+	
+	_handlePress1() {
+		this.props.navigator.pop();
+	}	
+	
 	_handlePress() {
 		//this.props.navigator.pop();
 		this.props.navigator.push(this.props.routes[2]);
@@ -168,11 +141,20 @@ class PageTwo extends Component {
     return (
       <View style={[styles.container, {backgroundColor: 'purple'}]}>
         <Text style={styles.welcome}>This is page two!</Text>
+		
         <TouchableOpacity onPress={this._handlePress.bind(this)}>
           <View style={{paddingVertical: 10, paddingHorizontal: 20, backgroundColor: 'black'}}>
             <Text style={styles.welcome}>Go to page three</Text>
           </View>
         </TouchableOpacity>
+		
+		<View style={{margin: 10}}></View>	
+		
+		<TouchableOpacity onPress={this._handlePress1.bind(this)}>
+			<View style={{paddingVertical: 20, paddingHorizontal: 20, backgroundColor: 'black'}}>
+				<Text style={styles.welcome}>Go back</Text>
+			</View>
+		</TouchableOpacity>	
        </View>
     )
   }
@@ -182,7 +164,11 @@ class PageThree extends Component {
 	constructor(props) {
 		super(props);	
 	}
-		
+	
+	_handlePress1() {
+		this.props.navigator.pop();
+	}	
+	
 	_handlePress() {
 		this.props.navigator.popToTop(0);
 		//this.props.navigator.push(this.props.routes[0]);
@@ -192,6 +178,15 @@ class PageThree extends Component {
     return (
       <View style={[styles.container, {backgroundColor: 'blue'}]}>
         <Text style={styles.welcome}>This is page three!</Text>
+
+		<TouchableOpacity onPress={this._handlePress1.bind(this)}>
+			<View style={{paddingVertical: 20, paddingHorizontal: 20, backgroundColor: 'black'}}>
+				<Text style={styles.welcome}>Go to page 2</Text>
+			</View>
+		</TouchableOpacity>	
+		
+		<View style={{margin: 10}}></View>	
+		
         <TouchableOpacity onPress={this._handlePress.bind(this)}>
           <View style={{paddingVertical: 10, paddingHorizontal: 20, backgroundColor: 'black'}}>
             <Text style={styles.welcome}>Go back</Text>

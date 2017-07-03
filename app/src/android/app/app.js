@@ -9,6 +9,7 @@ console.disableYellowBox = true;
 
 import Login from './login';
 import AppContainer from './appContainer';
+import SampleApp from './navigator';
 
 class App extends Component {
     constructor(props) {
