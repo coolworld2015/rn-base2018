@@ -6,9 +6,11 @@ import {
 	StyleSheet,
 	Text,
 	View,
+	ScrollView,
 	Navigator,
 	TouchableHighlight,
-	TouchableOpacity
+	TouchableOpacity,
+	WebView
 } from 'react-native';
 
 import NavigationExperimental from 'react-native-deprecated-custom-components';
@@ -35,7 +37,17 @@ class SampleApp extends Component {
 	//</ScrollableTabView>
 	render() {
 		return (
-			<PageOne tabLabel="PageOne" />
+			<ScrollView>
+				<View>
+					 <PageFirst />
+				</View>
+				<View>
+					<Text> Test </Text>  
+				</View>				
+				<View>
+					<PageTwo />
+				</View>	
+			</ScrollView>			
 		);
 	}
 }
@@ -52,6 +64,32 @@ class AppContainer extends Component {
 			</ScrollableTabView>
 		);
 	}
+}
+
+class PlayTrack extends Component {
+    constructor(props) {
+        super(props);
+		
+		this.state = {
+			html: 'https://www.facebook.com/wikrcom/videos/1118835278260392/'
+		};
+		
+		if (props.data) {
+			this.state = {
+				url: props.data.url,
+				html: 'https://www.facebook.com/wikrcom/videos/1118835278260392/'
+			}
+		}
+    }
+
+    render() {
+        return (
+            <WebView
+                source={{uri: this.state.html}}
+				mediaPlaybackRequiresUserAction={false}
+            />
+        )
+    }
 }
 
 class PageOne extends Component {
