@@ -45,7 +45,7 @@ class SampleApp extends Component {
 					<Text> Test </Text>  
 				</View>				
 				<View>
-					<PageTwo />
+					<PlayTrack />
 				</View>	
 			</ScrollView>			
 		);
@@ -71,7 +71,7 @@ class PlayTrack extends Component {
         super(props);
 		
 		this.state = {
-			html: 'https://www.facebook.com/wikrcom/videos/1118835278260392/'
+			html: 'http://video.itunes.apple.com/apple-assets-us-std-000001/Video5/v4/1c/6e/85/1c6e85ed-e4a6-f9be-b7bd-ceaa0faf3077/mzvf_7073124460975954476.640x476.h264lc.U.p.m4v'
 		};
 		
 		if (props.data) {
@@ -87,6 +87,7 @@ class PlayTrack extends Component {
             <WebView
                 source={{uri: this.state.html}}
 				mediaPlaybackRequiresUserAction={false}
+				style={{height: 200, width: 350}}
             />
         )
     }
