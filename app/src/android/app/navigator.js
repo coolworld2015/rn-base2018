@@ -25,7 +25,11 @@ class SampleApp extends Component {
  
 	render() {
 		return (
-			<DrawerLayout />
+ 
+				<AppContainer />
+ 
+		
+			
 		);
 	}
 }
@@ -37,14 +41,27 @@ class DrawerLayout extends Component {
 	
     componentDidMount() {
     }
+		
+	onBack() {
+		this.props.navigator.pop();
+	}	
 	
-    onLogin() {
+    onMenu() {
         this.refs['DRAWER_REF'].openDrawer();
     }
 	
     onLogOut() {
         this.refs['DRAWER_REF'].closeDrawer();
     }
+		
+	_handlePress1() {
+		this.props.navigator.pop();
+	}	
+	
+	_handlePress() {
+		//this.props.navigator.pop();
+		this.props.navigator.push(this.props.routes[2]);
+	}
 	
 	render() {
 		var navigationView = (
@@ -56,6 +73,14 @@ class DrawerLayout extends Component {
 					<Text style={styles.buttonText}>
 						Log out
 					</Text>
+				</TouchableHighlight>				
+				
+				<TouchableHighlight
+					onPress={() => this.onBack()}
+					style={styles.button}>
+					<Text style={styles.buttonText}>
+						Back
+					</Text>
 				</TouchableHighlight>
 			</View>
 		)
@@ -66,19 +91,25 @@ class DrawerLayout extends Component {
 				drawerWidth={300}
 				drawerPosition={DrawerLayoutAndroid.positions.Left}
 				renderNavigationView={() => navigationView}>
-				<View style={{flex: 1, alignItems: 'center'}}>
-					<Text style={{margin: 10, fontSize: 15, textAlign: 'right'}}>Hello</Text>
-					<Text style={{margin: 10, fontSize: 15, textAlign: 'right'}}>World!</Text>
 				
-					
-					<TouchableHighlight
-						onPress={() => this.onLogin()}
-						style={styles.button}>
-						<Text style={styles.buttonText}>
-							Log in
-						</Text>
-					</TouchableHighlight>
-				</View>	
+				<View style={[styles.container, {backgroundColor: 'purple'}]}>
+					<Text style={styles.welcome}>This is page two!</Text>
+
+					<TouchableOpacity onPress={this.onMenu.bind(this)}>
+					<View style={{paddingVertical: 10, paddingHorizontal: 20, backgroundColor: 'black'}}>
+					<Text style={styles.welcome}>Go to Menu</Text>
+					</View>
+					</TouchableOpacity>
+
+					<View style={{margin: 10}}></View>	
+
+					<TouchableOpacity onPress={this._handlePress1.bind(this)}>
+					<View style={{paddingVertical: 20, paddingHorizontal: 20, backgroundColor: 'black'}}>
+					<Text style={styles.welcome}>Go back</Text>
+					</View>
+					</TouchableOpacity>	
+				</View>				
+ 
 			</DrawerLayoutAndroid>
 		);
 	}
@@ -88,28 +119,14 @@ class AppContainer extends Component {
 	constructor(props) {
 		super(props);
 	}
-	
+	//<ScrollableTabView>
+	//</ScrollableTabView>
 	render() {
 		return (
-			<ScrollableTabView>
-				<PageOne tabLabel="PageOne" />
-			</ScrollableTabView>
+			<PageOne tabLabel="PageOne" />
 		);
 	}
 }
-
-/*
-PushFromRight
-FloatFromRight
-FloatFromLeft
-FloatFromBottom
-FloatFromBottomAndroid
-FadeAndroid
-HorizontalSwipeJump
-HorizontalSwipeJumpFromRight
-VerticalUpSwipeJump
-VerticalDownSwipeJump
-*/ 
 
 class PlayTrack extends Component {
     constructor(props) {
@@ -152,13 +169,26 @@ class PageOne extends Component {
 		switch (route.index) {
 			case 0: return <PageFirst routes={this.routes} navigator={navigator} />
 					break;			
-			case 1: return <PageTwo routes={this.routes} navigator={navigator} />
+			case 1: return <DrawerLayout routes={this.routes} navigator={navigator} />
 					break;			
 			case 2: return <PageThree routes={this.routes} navigator={navigator} />
 					break;
  		}
  	}	
-	
+
+/*
+PushFromRight
+FloatFromRight
+FloatFromLeft
+FloatFromBottom
+FloatFromBottomAndroid
+FadeAndroid
+HorizontalSwipeJump
+HorizontalSwipeJumpFromRight
+VerticalUpSwipeJump
+VerticalDownSwipeJump
+*/ 	
+
 	render() {
 		return (
             <NavigationExperimental.Navigator
@@ -166,7 +196,7 @@ class PageOne extends Component {
                 initialRouteStack={this.routes}
                 renderScene={this.renderScene.bind(this)}
                 configureScene={(route, routeStack) =>
-                    NavigationExperimental.Navigator.SceneConfigs.FloatFromBottomAndroid}
+                    NavigationExperimental.Navigator.SceneConfigs.PushFromRight}
             />
 		)
 	}
@@ -250,7 +280,7 @@ class PageThree extends Component {
 	}
 	
 	_handlePress1() {
-		this.props.navigator.pop();
+		this.props.navigator.push(this.props.routes[1]);
 	}	
 	
 	_handlePress() {
