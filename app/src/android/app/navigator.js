@@ -10,44 +10,76 @@ import {
 	Navigator,
 	TouchableHighlight,
 	TouchableOpacity,
-	WebView
+	WebView,
+	DrawerLayoutAndroid,
+	ViewPagerAndroid
 } from 'react-native';
 
 import NavigationExperimental from 'react-native-deprecated-custom-components';
 import ScrollableTabView, {DefaultTabBar} from 'react-native-scrollable-tab-view';
 
-/*
-PushFromRight
-FloatFromRight
-FloatFromLeft
-FloatFromBottom
-FloatFromBottomAndroid
-FadeAndroid
-HorizontalSwipeJump
-HorizontalSwipeJumpFromRight
-VerticalUpSwipeJump
-VerticalDownSwipeJump
-*/ 
-
 class SampleApp extends Component {
 	constructor(props) {
 		super(props);	
 	}
-	//<ScrollableTabView>
-	//</ScrollableTabView>
+ 
 	render() {
 		return (
-			<ScrollView>
-				<View>
-					 <PageFirst />
-				</View>
-				<View>
-					<Text> Test </Text>  
-				</View>				
-				<View>
-					<PlayTrack />
+			<DrawerLayout />
+		);
+	}
+}
+
+class DrawerLayout extends Component {
+	constructor(props) {
+		super(props);	
+	}
+	
+    componentDidMount() {
+    }
+	
+    onLogin() {
+        this.refs['DRAWER_REF'].openDrawer();
+    }
+	
+    onLogOut() {
+        this.refs['DRAWER_REF'].closeDrawer();
+    }
+	
+	render() {
+		var navigationView = (
+			<View style={{flex: 1, backgroundColor: '#fff'}}>
+				<Text style={{margin: 10, fontSize: 15, textAlign: 'left'}}>I'm in the Drawer!</Text>
+				<TouchableHighlight
+					onPress={() => this.onLogOut()}
+					style={styles.button}>
+					<Text style={styles.buttonText}>
+						Log out
+					</Text>
+				</TouchableHighlight>
+			</View>
+		)
+		
+		return (
+			<DrawerLayoutAndroid
+				ref={'DRAWER_REF'}
+				drawerWidth={300}
+				drawerPosition={DrawerLayoutAndroid.positions.Left}
+				renderNavigationView={() => navigationView}>
+				<View style={{flex: 1, alignItems: 'center'}}>
+					<Text style={{margin: 10, fontSize: 15, textAlign: 'right'}}>Hello</Text>
+					<Text style={{margin: 10, fontSize: 15, textAlign: 'right'}}>World!</Text>
+				
+					
+					<TouchableHighlight
+						onPress={() => this.onLogin()}
+						style={styles.button}>
+						<Text style={styles.buttonText}>
+							Log in
+						</Text>
+					</TouchableHighlight>
 				</View>	
-			</ScrollView>			
+			</DrawerLayoutAndroid>
 		);
 	}
 }
@@ -65,6 +97,19 @@ class AppContainer extends Component {
 		);
 	}
 }
+
+/*
+PushFromRight
+FloatFromRight
+FloatFromLeft
+FloatFromBottom
+FloatFromBottomAndroid
+FadeAndroid
+HorizontalSwipeJump
+HorizontalSwipeJumpFromRight
+VerticalUpSwipeJump
+VerticalDownSwipeJump
+*/ 
 
 class PlayTrack extends Component {
     constructor(props) {
@@ -249,6 +294,10 @@ const styles = StyleSheet.create({
     margin: 10,
     color: 'white',
   },
+   pageStyle: {
+    alignItems: 'center',
+    padding: 20,
+  } 
 });
 
 module.exports = SampleApp;
