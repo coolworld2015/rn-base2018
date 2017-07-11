@@ -25,11 +25,28 @@ class SampleApp extends Component {
  
 	render() {
 		return (
- 
-				<AppContainer />
- 
-		
-			
+  
+		<ViewPagerAndroid 
+			style={{flex: 1}}
+			initialPage={0}>
+
+			<View style={{backgroundColor: 'blue'}}>
+				<Text style={{color: 'white'}}>
+					First page
+				</Text>
+			</View>      
+			<View style={{backgroundColor: 'green'}}>
+				<Text style={{color: 'white'}}>
+					Second page
+				</Text>
+			</View>			
+			<View style={{backgroundColor: 'red'}}>
+				<Text style={{color: 'white'}}>
+					Third page
+				</Text>
+			</View>
+
+		</ViewPagerAndroid>
 		);
 	}
 }
