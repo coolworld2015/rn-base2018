@@ -66,7 +66,10 @@ class DrawerLayout extends Component {
 	render() {
 		var navigationView = (
 			<View style={{flex: 1, backgroundColor: '#fff'}}>
-				<Text style={{margin: 10, fontSize: 15, textAlign: 'left'}}>I'm in the Drawer!</Text>
+				<Text style={{margin: 10, fontSize: 15, textAlign: 'left'}}>
+					DrawerLayoutAndroid
+				</Text>
+				
 				<TouchableHighlight
 					onPress={() => this.onLogOut()}
 					style={styles.button}>
@@ -96,17 +99,17 @@ class DrawerLayout extends Component {
 					<Text style={styles.welcome}>This is page two!</Text>
 
 					<TouchableOpacity onPress={this.onMenu.bind(this)}>
-					<View style={{paddingVertical: 10, paddingHorizontal: 20, backgroundColor: 'black'}}>
-					<Text style={styles.welcome}>Go to Menu</Text>
-					</View>
+						<View style={{paddingVertical: 10, paddingHorizontal: 20, backgroundColor: 'black'}}>
+							<Text style={styles.welcome}>Go to Menu</Text>
+						</View>
 					</TouchableOpacity>
 
 					<View style={{margin: 10}}></View>	
 
 					<TouchableOpacity onPress={this._handlePress1.bind(this)}>
-					<View style={{paddingVertical: 20, paddingHorizontal: 20, backgroundColor: 'black'}}>
-					<Text style={styles.welcome}>Go back</Text>
-					</View>
+						<View style={{paddingVertical: 20, paddingHorizontal: 20, backgroundColor: 'black'}}>
+							<Text style={styles.welcome}>Go back</Text>
+						</View>
 					</TouchableOpacity>	
 				</View>				
  
@@ -208,31 +211,88 @@ class PageFirst extends Component {
 	}
 	
 	_handlePress2() {
+		this.refs['DRAWER_REF'].closeDrawer();
 		this.props.navigator.push({index: 1});
 	}		
 	
 	_handlePress3() {
+		this.refs['DRAWER_REF'].closeDrawer();
 		this.props.navigator.push({index: 2});
 	}		
 	
+    onMenu() {
+        this.refs['DRAWER_REF'].openDrawer();
+    }
+		
+    onLogOut() {
+        this.refs['DRAWER_REF'].closeDrawer();
+    }
+	
 	render() {
+		var navigationView = (
+			<View style={{flex: 1, backgroundColor: '#fff'}}>
+				<Text style={{margin: 10, fontSize: 15, textAlign: 'left'}}>
+					DrawerLayoutAndroid
+				</Text>
+				
+				<TouchableHighlight
+					onPress={() => this.onLogOut()}
+					style={styles.button}>
+					<Text style={styles.buttonText}>
+						Page 1
+					</Text>
+				</TouchableHighlight>	
+				
+				<TouchableHighlight
+					onPress={() => this._handlePress2()}
+					style={styles.button}>
+					<Text style={styles.buttonText}>
+						Page 2
+					</Text>
+				</TouchableHighlight>				
+				
+				<TouchableHighlight
+					onPress={() => this._handlePress3()}
+					style={styles.button}>
+					<Text style={styles.buttonText}>
+						Page 3
+					</Text>
+				</TouchableHighlight>
+			</View>
+		)
+		
 		return (
+			<DrawerLayoutAndroid
+				ref={'DRAWER_REF'}
+				drawerWidth={300}
+				drawerPosition={DrawerLayoutAndroid.positions.Left}
+				renderNavigationView={() => navigationView}>
+				
 			<View style={[styles.container, {backgroundColor: 'green'}]}>
 				<Text style={styles.welcome}>This is page one!</Text>
+				<TouchableOpacity onPress={this.onMenu.bind(this)}>
+					<View style={{paddingVertical: 10, paddingHorizontal: 20, backgroundColor: 'black'}}>
+						<Text style={styles.welcome}>Go to Menu</Text>
+					</View>
+				</TouchableOpacity>		
+				
+				<View style={{margin: 10}}></View>	
 				<TouchableOpacity onPress={this._handlePress2.bind(this)}>
 					<View style={{paddingVertical: 20, paddingHorizontal: 20, backgroundColor: 'black'}}>
 						<Text style={styles.welcome}>Go to page 2</Text>
 					</View>
 				</TouchableOpacity>		
 				
-				<View style={{margin: 10}}></View>	
-				
+				<View style={{margin: 10}}></View>		
 				<TouchableOpacity onPress={this._handlePress3.bind(this)}>
 					<View style={{paddingVertical: 20, paddingHorizontal: 20, backgroundColor: 'black'}}>
 						<Text style={styles.welcome}>Go to page 3</Text>
 					</View>
 				</TouchableOpacity>	
-			</View>
+			</View>			
+ 
+			</DrawerLayoutAndroid>		
+
 		)
 	}
 }
