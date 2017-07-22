@@ -9,7 +9,9 @@ console.disableYellowBox = true;
 
 import Login from './login';
 import AppContainer from './appContainer';
-import SampleApp from './navigator';
+
+//import SampleApp from './navigator';
+import SampleApp from './mocks';
 
 class App extends Component {
     constructor(props) {
@@ -23,7 +25,7 @@ class App extends Component {
 		});
 		
         this.state = {
-            isLoggedIn: false
+            isLoggedIn: true
         };
 
         window.appConfig = {
@@ -42,7 +44,7 @@ class App extends Component {
     render() {
         if (this.state.isLoggedIn) {
             return (
-                <AppContainer />
+                <SampleApp />
             )
         } else {
             return (
