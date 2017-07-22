@@ -348,10 +348,10 @@ class PageFirst extends Component {
 							<TouchableOpacity onPress={this._handlePress2.bind(this)}>
 								<View style={styles.tileLeft}>
 									<Image style={styles.logo}
-										source={require('../../../img/users1.png')}
+										source={require('../../../img/skype.png')}
 									/>
 									<Text style={styles.title}>
-										Users
+										Skype
 									</Text>
 								</View>
 							</TouchableOpacity>								
@@ -359,10 +359,10 @@ class PageFirst extends Component {
 							<TouchableOpacity onPress={this._handlePress3.bind(this)}>
 								<View style={styles.tileRight}>
 									<Image style={styles.logo}
-										source={require('../../../img/phones1.png')}
+										source={require('../../../img/linkedin.png')}
 									/>
 									<Text style={styles.title}>
-										Phones
+										Linkedin
 									</Text>
 								</View>
 							</TouchableOpacity>			
@@ -396,10 +396,10 @@ class PageFirst extends Component {
 							<TouchableOpacity onPress={this._handlePress2.bind(this)}>
 								<View style={styles.tileLeft}>
 									<Image style={styles.logo}
-										source={require('../../../img/apple.png')}
+										source={require('../../../img/android.png')}
 									/>
 									<Text style={styles.title}>
-										Apple
+										Android
 									</Text>
 								</View>
 							</TouchableOpacity>								
@@ -407,10 +407,10 @@ class PageFirst extends Component {
 							<TouchableOpacity onPress={this._handlePress3.bind(this)}>
 								<View style={styles.tileRight}>
 									<Image style={styles.logo}
-										source={require('../../../img/dropbox.png')}
+										source={require('../../../img/win8.png')}
 									/>
 									<Text style={styles.title}>
-										Dropbox
+										Windows
 									</Text>
 								</View>
 							</TouchableOpacity>			
