@@ -310,7 +310,7 @@ class PageFirst extends Component {
 				renderNavigationView={() => navigationView}>
 				
 				
-				<View style={{backgroundColor: '#009698', height:1000}}>
+				<View style={{backgroundColor: '#009698', paddingBottom: 100}}>
 					<View style={styles.header}>
 						<View>
 							<TouchableWithoutFeedback onPress={this.onMenu.bind(this)}>
@@ -334,7 +334,7 @@ class PageFirst extends Component {
 							<TouchableWithoutFeedback>
 								<View>
 									<Text style={styles.textSmall}>
-										New
+										
 									</Text>
 								</View>
 							</TouchableWithoutFeedback>
@@ -342,7 +342,7 @@ class PageFirst extends Component {
 					</View>
 					
 					<ScrollView>
-						<Text style={styles.welcome}>This is page one!</Text>
+						<Text style={styles.welcome}></Text>
  	
 						<View style={styles.row}>
 							<TouchableOpacity onPress={this._handlePress2.bind(this)}>
@@ -351,7 +351,7 @@ class PageFirst extends Component {
 										source={require('../../../img/users1.png')}
 									/>
 									<Text style={styles.title}>
-										Go to page 2
+										Users
 									</Text>
 								</View>
 							</TouchableOpacity>								
@@ -362,13 +362,12 @@ class PageFirst extends Component {
 										source={require('../../../img/phones1.png')}
 									/>
 									<Text style={styles.title}>
-										Go to page 3
+										Phones
 									</Text>
 								</View>
 							</TouchableOpacity>			
 						</View>
 
- 	
 						<View style={styles.row}>
 							<TouchableOpacity onPress={this._handlePress2.bind(this)}>
 								<View style={styles.tileLeft}>
@@ -376,7 +375,7 @@ class PageFirst extends Component {
 										source={require('../../../img/apple.png')}
 									/>
 									<Text style={styles.title}>
-										Go to page 2
+										Apple
 									</Text>
 								</View>
 							</TouchableOpacity>								
@@ -387,13 +386,37 @@ class PageFirst extends Component {
 										source={require('../../../img/dropbox.png')}
 									/>
 									<Text style={styles.title}>
-										Go to page 3
+										Dropbox
 									</Text>
 								</View>
 							</TouchableOpacity>			
-						</View>						
+						</View>	
+						
+						<View style={styles.row}>
+							<TouchableOpacity onPress={this._handlePress2.bind(this)}>
+								<View style={styles.tileLeft}>
+									<Image style={styles.logo}
+										source={require('../../../img/apple.png')}
+									/>
+									<Text style={styles.title}>
+										Apple
+									</Text>
+								</View>
+							</TouchableOpacity>								
+							
+							<TouchableOpacity onPress={this._handlePress3.bind(this)}>
+								<View style={styles.tileRight}>
+									<Image style={styles.logo}
+										source={require('../../../img/dropbox.png')}
+									/>
+									<Text style={styles.title}>
+										Dropbox
+									</Text>
+								</View>
+							</TouchableOpacity>			
+						</View>		
+											
 					</ScrollView>
-					
 				</View>			
 			</DrawerLayoutAndroid>		
 		)
@@ -519,8 +542,8 @@ const styles = StyleSheet.create({
 	header: {
 		flexDirection: 'row',
 		justifyContent: 'space-between',
-		//backgroundColor: '#48BBEC',
-		backgroundColor: 'darkblue',
+		backgroundColor: '#48BBEC',
+		//backgroundColor: 'darkblue',
 		borderWidth: 0,
 		borderColor: 'whitesmoke'
 	},	
