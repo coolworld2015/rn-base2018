@@ -310,7 +310,7 @@ class PageFirst extends Component {
 				renderNavigationView={() => navigationView}>
 				
 				
-				<View style={{backgroundColor: '#009698', paddingBottom: 100}}>
+				<View style={{backgroundColor: '#009698', paddingBottom: 0, height: 1000}}>
 					<View style={styles.header}>
 						<View>
 							<TouchableWithoutFeedback onPress={this.onMenu.bind(this)}>
@@ -549,7 +549,7 @@ const styles = StyleSheet.create({
 	},	
 	row: {
 		flexDirection: 'row',
-		justifyContent: 'space-between',
+		justifyContent: 'center',
 		//backgroundColor: '#48BBEC',
 		//backgroundColor: 'darkblue',
 	},
@@ -594,25 +594,27 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		margin: 14,
 		marginTop: 16,
-		marginLeft: 65
+		marginLeft: 45
 	}, 	
 	tileLeft: {
-		paddingVertical: 20, 
+		paddingVertical: 10, 
 		backgroundColor: '#48BBEC', 
 		borderWidth: 5,
 		borderColor: 'whitesmoke',
-		width: 170,
+		width: 130,
 		margin: 5,
-		marginLeft: 15,
+		//marginLeft: 15,
+		borderRadius: 15
 	},
 	tileRight: {
-		paddingVertical: 20, 
+		paddingVertical: 10, 
 		backgroundColor: '#48BBEC', 
 		borderWidth: 5,
 		borderColor: 'whitesmoke',
-		width: 170,
+		width: 130,
 		margin: 5,
-		marginRight: 30,
+		//marginRight: 15,
+		borderRadius: 15
 	} 
 });
 
