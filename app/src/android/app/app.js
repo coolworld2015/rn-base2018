@@ -25,7 +25,7 @@ class App extends Component {
 		});
 		
         this.state = {
-            isLoggedIn: true
+            isLoggedIn: false
         };
 
         window.appConfig = {
@@ -44,7 +44,7 @@ class App extends Component {
     render() {
         if (this.state.isLoggedIn) {
             return (
-                <SampleApp />
+                <AppContainer />
             )
         } else {
             return (
